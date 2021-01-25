@@ -2,7 +2,18 @@
 <head>
     <meta charset="UTF-8">
     <title>pai2 ge zep1 a kik1</title>
+    <script>
+        const converter =  (input) => input + "a";
+    </script>
 </head>
 <body>
-官民共に困らないためにこれを定める。
+官民共に困らないためにこれを作る。
+<br>
+<b>input</b>
+<br>
+<textarea id="in" spellcheck="false" onkeyup = "document.getElementById('out').value = converter(document.getElementById('in').value)"></textarea>
+<br>
+<b>output</b>
+<br>
+<textarea id="out" readonly spellcheck="false"></textarea>
 </body>
