@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>牌語IPA変換機</title>
+    <script>
+        const latin_to_ipa = {
+            "a": "a", //A
+            "e": "ə", "o": "ou", //E
+            "i": "i", "y": "y", //I
+            "u": "u", //U
+            "p": "p", "b": "b", "m": "m", //P
+            "c": "s", "s": "z", "x": "ɕ", "z": "t͡s", "ž": "t͡ɕ", //C
+            "t": "t", "d": "d", "n": "n", "l": "ɾ", //T
+            "k": "k", "g": "g", "h": "x", //K
+            "0": "³", "1": "⁵⁵", "2": "¹¹"
+        }
+
+        const exception = {
+            "zau": "žau", "zap2": "žap2", "ze1": "že1", "zep1": "žep1"
+        }
+
+        const process_pekzep_word = word => word
+            .split("")
+            .map(
+                (c) => latin_to_ipa[c] ?? c
+            )
+            .join("")
+            .replace(/əi/g, "ei")
+            .replace(/t͡si/g, "t͡ɕi")
+            .replace(/([.!?"])³/g, "³$1")
+
+        const converter = (input) => input
+            .split(" ")
+            .map(
+                (c) => exception[c] ?? c
+            )
+            .map(
+                word => word.match(/[12]/) ? word : word === "" ? word : word + "0"
+            )
+            .map(
+                word => word.match(/^[0-9]+$/) ? word : process_pekzep_word(word)
+            )
+            .join(" ")
+
+
+    </script>
+</head>
+
+<body>
+    <b>牌語IPA変換機</b>
+    <br>
+    ラテン字転写を入力するとIPAになる。
+    <br>
+    <b>input</b>
+    <br>
+    <textarea style="font-family: Arial, Helvetica, sans-serif;" id="in" spellcheck="false" textarea rows="10" cols="80"
+        onkeyup="document.getElementById('out').value = converter(document.getElementById('in').value)"></textarea>
+    <br>
+    <b>output</b>
+    <br>
+    <textarea style="font-family: Arial, Helvetica, sans-serif;" id="out" readonly spellcheck="false" textarea rows="10"
+        cols="80"></textarea>
+</body>
