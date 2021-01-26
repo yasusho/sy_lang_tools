@@ -39,7 +39,7 @@
                 word => word.match(/[12]/) ? word : word === "" ? word : word + "0"
             )
             .map(
-                process_pekzep_word
+                word => word.match(/^[0-9]+$/) ? word : process_pekzep_word(word)
             )
             .join(" ")
 
