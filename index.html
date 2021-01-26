@@ -3,7 +3,19 @@
     <meta charset="UTF-8">
     <title>pai2 ge zep1 a kik1</title>
     <script>
-        const converter =  (input) => input + "a";
+        const latin_to_ipa = {
+            "a":"a", //A
+            "e":"ə", "o":"ou", //E
+            "i":"i", "y":"y", //I
+            "u":"u", //U
+            "p":"p", "b":"b", "m":"m", //P
+            "c":"s", "s":"z", "x":"ɕ", "z":"t͡s", //C
+            "t":"t", "d":"d", "n":"n", "l":"ɾ", //T
+            "k":"k", "g":"g", "h":"x", //K
+            }
+        const converter =  (input) => input.split("").map(
+            (c) => latin_to_ipa[c] ?? "*"
+        ).join("")
     </script>
 </head>
 <body>
